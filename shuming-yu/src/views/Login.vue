@@ -47,9 +47,9 @@ export default {
     },
     methods: {
         signIn() {
-            //console.log('login')
             const api = `${process.env.VUE_APP_API}admin/signin`;
             //console.log(api);
+            //             api路徑, 傳送資料
             this.$http.post(api, this.user)
                 .then((res) => {
                     // Cookie 存取的語法參考 : https://developer.mozilla.org/zh-CN/docs/Web/API/Document/cookie
@@ -57,7 +57,7 @@ export default {
                     console.log('token', token, 'expired', expired);
                     document.cookie = `benToken=${token}; expires=${new Date(expired)}`;
                     // 測試 yu.shuming0829@gmail.com , 1qaz@WSX 
-                    // 送出後檢查,點選網址旁[驚嘆號]內Cookie -> benToken
+                    // 送出後檢查,點選網址旁[驚嘆號]內Cookie -> benToken(可自取名稱)
                     console.log(res);
                 })
         }

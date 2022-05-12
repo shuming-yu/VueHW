@@ -54,15 +54,13 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 1. MDN 文件，將 Cookie 存入、取出：https://developer.mozilla.org/zh-CN/docs/Web/API/Document/cookie
 附上範例程式碼：
 
-const token = response.data.token;
-const expired = response.data.expired;
-console.log(token, expired);
-document.cookie = `hexToken=${token};expires=${new Date(expired)};`;
-```
+- const token = response.data.token;
+- const expired = response.data.expired;
+- console.log(token, expired);
+- document.cookie = `hexToken=${token};expires=${new Date(expired)};`;
 
 2. Axios 文件，設定預設 Headers：https://github.com/axios/axios#global-axios-defaults
 附上範例程式碼：
 
-const token = document.cookie.replace(/(?:(?:^|.*;\s*)hexToken\s*=\s*([^;]*).*$)|^.*$/, '$1');
-this.$http.defaults.headers.common.Authorization = `${token}`;
-```
+- const token = document.cookie.replace(/(?:(?:^|.*;\s*)hexToken\s*=\s*([^;]*).*$)|^.*$/, '$1');
+- this.$http.defaults.headers.common.Authorization = `${token}`;
