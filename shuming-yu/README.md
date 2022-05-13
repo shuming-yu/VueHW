@@ -23,6 +23,12 @@ npm run lint
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
+## 課程需要安裝套件
+
+1. Bootstrap 六角學院 : https://bootstrap5.hexschool.com/
+
+2. Vue-axios : https://www.npmjs.com/package/vue-axios
+
 ## 課程 API 文件及相關資源
 
 1. 課程需要先註冊屬於個人的 API 路徑，註冊方法在下一小節會介紹，而註冊網址與 API 站點都是以下連結：

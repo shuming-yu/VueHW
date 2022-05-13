@@ -13,7 +13,7 @@ export default {
         // https://github.com/axios/axios#global-axios-defaults
         this.$http.defaults.headers.common.Authorization = token;
 
-        // 檢查用戶是否仍持續登入api參考 : https://github.com/hexschool/vue3-course-api-wiki/wiki/%E7%99%BB%E5%85%A5%E5%8F%8A%E9%A9%97%E8%AD%89
+        // 檢查用戶是否仍持續登入api : https://github.com/hexschool/vue3-course-api-wiki/wiki/%E7%99%BB%E5%85%A5%E5%8F%8A%E9%A9%97%E8%AD%89
         const api = `${process.env.VUE_APP_API}api/user/check`;
             this.$http.post(api)
                 .then((res) => {

@@ -16,6 +16,7 @@
 </template>
 
 <style lang="scss">
-//@import "~bootstrap/scss/bootstrap";
+// Bootstrap 六角學院 : https://bootstrap5.hexschool.com/
+// @import "~bootstrap/scss/bootstrap";
 @import "./assets/all";
 </style>

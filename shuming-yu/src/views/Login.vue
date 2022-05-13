@@ -61,7 +61,7 @@ export default {
                         console.log('token:', token, 'expired:', expired);
                         document.cookie = `benToken=${token}; expires=${new Date(expired)}`;
                         // 測試 yu.shuming0829@gmail.com , 1qaz@WSX 
-                        // 送出後檢查,點選網址旁[驚嘆號]內Cookie -> benToken(可自取名稱)
+                        // 送出後檢查,點選網址旁[驚嘆號]內Cookie -> benToken(名稱可自取)
                         console.log(res);
 
                         this.$router.push('/dashboard');    // 登入為成功狀態時, 轉到dashboard畫面
