@@ -1,9 +1,19 @@
 <template>
-    <div>Dashboard</div>
+
+    <Navbar></Navbar>
+    <router-view/>
+
 </template>
 
 <script>
+import Navbar from '../components/Navbar.vue';
+
 export default {
+
+    components: {
+        Navbar,
+    },
+
     created() {
         // 得到名為benToken的Cookie : https://developer.mozilla.org/zh-CN/docs/Web/API/Document/cookie
         const token = document.cookie.replace(/(?:(?:^|.*;\s*)benToken\s*\=\s*([^;]*).*$)|^.*$/, "$1");
