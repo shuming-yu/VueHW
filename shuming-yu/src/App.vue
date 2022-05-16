@@ -12,6 +12,7 @@
   <button type="button" class="btn btn-light">Light</button>
   <button type="button" class="btn btn-dark">Dark</button>
   <button type="button" class="btn btn-link">Link</button> -->
+  <!-- bootstrap classname 版面間距 -->
   <div class="container-fluid">
   <router-view/>
   </div>

@@ -1,4 +1,11 @@
 <template>
+
+    <div class="text-end">
+        <button class="btn btn-primary" type="button" @click="$refs.productModal.showModal()">
+        新增一個產品
+        </button>
+    </div>
+
     <table class="table mt-4">
     <thead>
         <tr>
@@ -33,9 +40,13 @@
         </tr>
     </tbody>
     </table>
+    <ProductModal ref="productModal"></ProductModal>
+    
 </template>
 
 <script>
+import ProductModal from '../components/ProductModal.vue';
+
 export default {
 
     data() {
@@ -44,6 +55,11 @@ export default {
             pagination: {}, // 分頁
         }
     },
+
+    components: {   //區域註冊
+        ProductModal,
+    },
+
     methods: {
         getProducts() {
             // 取得商品列表api參考 : https://github.com/hexschool/vue3-course-api-wiki/wiki/%E7%AE%A1%E7%90%86%E6%8E%A7%E5%88%B6%E5%8F%B0-%5B%E9%9C%80%E9%A9%97%E8%AD%89%5D#%E5%8F%96%E5%BE%97%E5%95%86%E5%93%81%E5%88%97%E8%A1%A8
@@ -59,6 +75,7 @@ export default {
                 })
         }
     },
+
     created() {
         this.getProducts();
     }
