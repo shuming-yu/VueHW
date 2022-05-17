@@ -17,7 +17,7 @@ export default {
     created() {
         // 得到名為benToken的Cookie : https://developer.mozilla.org/zh-CN/docs/Web/API/Document/cookie
         const token = document.cookie.replace(/(?:(?:^|.*;\s*)benToken\s*\=\s*([^;]*).*$)|^.*$/, "$1");
-        console.log(token);
+        //console.log(token);
 
         // axios全域設定, 將token加入進來, 之後每次發送api時會自動夾帶token在header內
         // https://github.com/axios/axios#global-axios-defaults
@@ -27,7 +27,7 @@ export default {
         const api = `${process.env.VUE_APP_API}api/user/check`;
             this.$http.post(api)
                 .then((res) => {
-                    console.log(res);
+                    //console.log(res);
                     if(!res.data.success){  // 失敗時執行
                         this.$router.push('/login');    // 登入為失敗狀態時, 轉回到login畫面
                         // 測試網址旁將cookie-benToken刪除
