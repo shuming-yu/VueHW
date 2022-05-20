@@ -144,12 +144,12 @@ export default {
     },
     props: {
         propProduct: {  // 內層接收
-            type: Object,   // 傳進來型別為Object
+            type: Object,   // 傳進來型別為 Object
             default() { return {} },    // 若外層無正確傳遞, 預設值回傳空物件
         }
     },
     watch: {
-        propProduct() {
+        propProduct() { // 監聽 propProduct 有無變動
             // 單向數據流, 不可直接修改外層資料
             // 將外層傳進來資料 propProduct 寫入內層 temProduct
             this.tempProduct = this.propProduct;

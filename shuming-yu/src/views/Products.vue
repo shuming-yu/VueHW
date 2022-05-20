@@ -1,7 +1,7 @@
 <template>
 
     <div class="text-end">
-        <button class="btn btn-primary" type="button" @click="openModal">
+        <button class="btn btn-primary" type="button" @click="openModal(true)">
         新增一筆產品
         </button>
     </div>
@@ -19,24 +19,26 @@
     </thead>
     <tbody>
         <tr v-for="item in products" :key="item.id">
-        <td>{{ item.category }}</td>
-        <td>{{ item.title }}</td>
-        <td class="text-right">
-            {{ item.origin_price }}
-        </td>
-        <td class="text-right">
-            {{ item.price }}
-        </td>
-        <td>
-            <span class="text-success" v-if="item.is_enabled">啟用</span>
-            <span class="text-muted" v-else>未啟用</span>
-        </td>
-        <td>
-            <div class="btn-group">
-            <button class="btn btn-outline-primary btn-sm">編輯</button>
-            <button class="btn btn-outline-danger btn-sm">刪除</button>
-            </div>
-        </td>
+            <td>{{ item.category }}</td>
+            <td>{{ item.title }}</td>
+            <td class="text-right">
+                {{ item.origin_price }}
+            </td>
+            <td class="text-right">
+                {{ item.price }}
+            </td>
+            <td>
+                <span class="text-success" v-if="item.is_enabled">啟用</span>
+                <span class="text-muted" v-else>未啟用</span>
+            </td>
+            <td>
+                <div class="btn-group">
+                <button class="btn btn-outline-primary btn-sm"
+                        @click="openModal(false, item)">編輯</button>
+                    <!-- openModal 函式內 item 帶入上方 v-for 的 item -->
+                <button class="btn btn-outline-danger btn-sm">刪除</button>
+                </div>
+            </td>
         </tr>
     </tbody>
     </table>
@@ -58,6 +60,7 @@ export default {
             products: [],   // 產品資訊
             pagination: {}, // 分頁
             addProduct: {}, // 外層product
+            isNew: false,   // 提供 openModal 判斷
         }
     },
 
@@ -78,25 +81,46 @@ export default {
                     }
                 })
         },
-        openModal() {   // 點選新增產品按鈕時執行
-            this.addProduct = {};   // 清空欄位動作
+
+        openModal(isNew, item) {   // 點選 [新增/編輯] 產品按鈕時執行
+            // console.log(isNew, item);   // 判斷true&false, 帶入item資訊
+            this.isNew = isNew; // 將狀態存入
+            if(isNew){  // true
+                this.addProduct = {};   // 清空欄位動作
+            }else{  // false
+                this.addProduct = { ...item }; // 淺層拷貝
+            }
+
             const productComponent = this.$refs.productModal;
             productComponent.showModal();   // 手動打開動態視窗
         },
+
         confirmProduct(item) {  // 點選Modal確認按鈕執行
             // console.log(item);  // 可先註解下方程式, 確認參數是否正確傳遞
             this.addProduct = item;
+
+            // 新增
             // 建立商品列表api參考 : https://github.com/hexschool/vue3-course-api-wiki/wiki/%E7%AE%A1%E7%90%86%E6%8E%A7%E5%88%B6%E5%8F%B0-%5B%E9%9C%80%E9%A9%97%E8%AD%89%5D#%E5%95%86%E5%93%81%E5%BB%BA%E7%AB%8B
-            const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/product`;
+            let api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/product`;
+            let httpMethod = 'post';
+
+            // 編輯
+            // 修改商品列表api參考 : https://github.com/hexschool/vue3-course-api-wiki/wiki/%E7%AE%A1%E7%90%86%E6%8E%A7%E5%88%B6%E5%8F%B0-%5B%E9%9C%80%E9%A9%97%E8%AD%89%5D#%E4%BF%AE%E6%94%B9%E7%94%A2%E5%93%81
+            if(!this.isNew){ // 判斷為 false 執行
+                api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/product/${item.id}`;
+                httpMethod = 'put';
+            }
+
             const productComponent = this.$refs.productModal;
-            
-            this.$http.post(api, { data : this.addProduct })
+            // object[propertyName], propertyName 可以使用變數的方式傳入
+            // 參考 : https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Guide/Working_with_Objects#Objects_and_properties
+            this.$http[httpMethod](api, { data : this.addProduct })
                 .then((res) => {
                     console.log(res);
                     productComponent.hideModal();   // 送出後隱藏表單modal
                     this.getProducts(); // 重新取得列表資料
                 })
-        }
+        },
     },
 
     created() {
