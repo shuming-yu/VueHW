@@ -118,6 +118,7 @@ export default {
                 .then((res) => {
                     console.log(res);
                     productComponent.hideModal();   // 送出後隱藏表單modal
+                    
                     this.getProducts(); // 重新取得列表資料
                 })
         },

@@ -22,7 +22,10 @@
                 <label for="customFile" class="form-label">或 上傳圖片
                 <i class="fas fa-spinner fa-spin"></i>
                 </label>
-                <input type="file" id="customFile" class="form-control">
+                <input type="file" id="customFile" class="form-control"
+                        ref="fileInput"
+                        @change="uploadFile">
+                    <!-- 當input有輸入任何內容後觸發 uploadFile 事件 -->
             </div>
             <img class="img-fluid" alt="">
             <!-- 延伸技巧，多圖 -->
@@ -140,7 +143,29 @@ export default {
         },
         hideModal() {
             this.modal.hide();
-        }
+        },
+        uploadFile() {  // 上傳圖片
+            // 上傳圖片api參考 : https://github.com/hexschool/vue3-course-api-wiki/wiki/%E7%AE%A1%E7%90%86%E6%8E%A7%E5%88%B6%E5%8F%B0-%5B%E9%9C%80%E9%A9%97%E8%AD%89%5D#%E4%B8%8A%E5%82%B3%E5%9C%96%E7%89%87
+
+            const uploadedFile = this.$refs.fileInput.files[0]; // 
+            const selectImage = this.$refs.fileInput.id;    // 使用refs方式取得id
+            // console.dir(uploadedFile);   // 檢查內容下的files
+
+            const formData = new FormData();    // 建立 FormData 格式內容
+            formData.append('file-to-upload', uploadedFile);    // 將 uploadedFile 內容帶入
+            // append 增加欄位到表單
+            // file-to-upload 欄位名稱對應 input 內的 name 屬性
+
+            const rul = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/upload`;
+            this.$http.post(rul, formData)
+                .then((res) => {
+                    console.log(res.data);  // 檢查 data 內 imageUrl 網址
+                    if(res.success){
+                        this.tempProduct.imageUrl = res.data.imageUrl;  // 將 imageUrl 值傳到 tempProduct 物件內
+                        document.getElementById(selectImage).value = '';    // 取得id方式清空value
+                    }
+                })
+        },
     },
     props: {
         propProduct: {  // 內層接收
