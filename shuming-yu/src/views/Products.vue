@@ -36,7 +36,8 @@
                 <button class="btn btn-outline-primary btn-sm"
                         @click="openModal(false, item)">編輯</button>
                     <!-- openModal 函式內 item 帶入上方 v-for 的 item -->
-                <button class="btn btn-outline-danger btn-sm">刪除</button>
+                <button class="btn btn-outline-danger btn-sm"
+                        @click="openDelproductModal(item)">刪除</button>
                 </div>
             </td>
         </tr>
@@ -47,11 +48,15 @@
                 @confirm-product="confirmProduct"></ProductModal>
     <!-- 口訣:前內後外 -->
     <!-- addProduct透過props傳送, 內層使用ProductModal.vue(props) -> propProduct 進行接收 -->
+    <DelModal ref="delModal"
+            :item="addProduct"
+            @delProdcut="delProduct"></DelModal>
     
 </template>
 
 <script>
 import ProductModal from '../components/ProductModal.vue';
+import DelModal from "../components/DelModal.vue";
 
 export default {
 
@@ -65,7 +70,8 @@ export default {
     },
 
     components: {   //區域註冊
-        ProductModal,
+        ProductModal,   
+        DelModal,   
     },
 
     methods: {
@@ -118,8 +124,27 @@ export default {
                 .then((res) => {
                     console.log(res);
                     productComponent.hideModal();   // 送出後隱藏表單modal
-                    
                     this.getProducts(); // 重新取得列表資料
+                })
+        },
+
+        // 點選刪除按鈕 popout
+        openDelproductModal(item) {
+            // console.log(item);   // 檢查取得資料
+            this.addProduct = { ...item };
+            const delproductComponent = this.$refs.delModal;
+            delproductComponent.showModal();    
+        },
+        // 刪除
+        // 刪除產品api參考 : https://github.com/hexschool/vue3-course-api-wiki/wiki/%E7%AE%A1%E7%90%86%E6%8E%A7%E5%88%B6%E5%8F%B0-%5B%E9%9C%80%E9%A9%97%E8%AD%89%5D#%E5%88%AA%E9%99%A4%E7%94%A2%E5%93%81
+        delProduct() {
+            const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/product/${this.addProduct.id}`;
+            this.$http.delete(api)
+                .then((res) => {
+                    console.log(res);
+                    const delproductComponent = this.$refs.delModal;
+                    delproductComponent.hideModal();
+                    this.getProducts();
                 })
         },
     },

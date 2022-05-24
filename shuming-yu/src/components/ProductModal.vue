@@ -127,7 +127,8 @@
 </template>
 
 <script>
-import Modal from 'bootstrap/js/dist/modal';
+import modalMixin from "../mixins/modalMixins";
+// import Modal from 'bootstrap/js/dist/modal';
 
 export default {
     data() {
@@ -138,12 +139,12 @@ export default {
     },
     methods: {
         // bootstrap 方法參考 : https://bootstrap5.hexschool.com/docs/5.1/components/modal/#show
-        showModal() {
-            this.modal.show();
-        },
-        hideModal() {
-            this.modal.hide();
-        },
+        // showModal() {
+        //     this.modal.show();
+        // },
+        // hideModal() {
+        //     this.modal.hide();
+        // },
         uploadFile() {  // 上傳圖片
             // 上傳圖片api參考 : https://github.com/hexschool/vue3-course-api-wiki/wiki/%E7%AE%A1%E7%90%86%E6%8E%A7%E5%88%B6%E5%8F%B0-%5B%E9%9C%80%E9%A9%97%E8%AD%89%5D#%E4%B8%8A%E5%82%B3%E5%9C%96%E7%89%87
 
@@ -154,7 +155,7 @@ export default {
             const formData = new FormData();    // 建立 FormData 格式內容
             formData.append('file-to-upload', uploadedFile);    // 將 uploadedFile 內容帶入
             // append 增加欄位到表單
-            // file-to-upload 欄位名稱對應 input 內的 name 屬性
+            // api 上傳檔案對應欄位, file-to-upload 欄位名稱對應 input 內的 name 屬性
 
             const rul = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/upload`;
             this.$http.post(rul, formData)
@@ -182,11 +183,12 @@ export default {
     },
     // created 不一定取得到ref
     // mounted 畫面才是完全生成狀態
-    mounted() {
-        // 互動元件Modal參考 : https://bootstrap5.hexschool.com/docs/5.1/components/modal/#via-javascript
-        // data定義變數      動元素指向外層ref="modal"
-        // console.log(this.$refs.modal);
-        this.modal = new Modal(this.$refs.modal);
-    },
+    // mounted() {
+    //     // 互動元件Modal參考 : https://bootstrap5.hexschool.com/docs/5.1/components/modal/#via-javascript
+    //     // data定義變數      動元素指向外層ref="modal"
+    //     // console.log(this.$refs.modal);
+    //     this.modal = new Modal(this.$refs.modal);
+    // },
+    mixins: [modalMixin],
 }
 </script>
