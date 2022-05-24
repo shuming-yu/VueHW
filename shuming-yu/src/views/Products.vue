@@ -1,5 +1,5 @@
 <template>
-
+    <Loading :active="isLoading"></Loading>
     <div class="text-end">
         <button class="btn btn-primary" type="button" @click="openModal(true)">
         新增一筆產品
@@ -66,6 +66,7 @@ export default {
             pagination: {}, // 分頁
             addProduct: {}, // 外層product
             isNew: false,   // 提供 openModal 判斷
+            isLoading: false,   // 提供 vue3-loading-overlay 
         }
     },
 
@@ -78,8 +79,10 @@ export default {
         getProducts() {
             // 取得商品列表api參考 : https://github.com/hexschool/vue3-course-api-wiki/wiki/%E7%AE%A1%E7%90%86%E6%8E%A7%E5%88%B6%E5%8F%B0-%5B%E9%9C%80%E9%A9%97%E8%AD%89%5D#%E5%8F%96%E5%BE%97%E5%95%86%E5%93%81%E5%88%97%E8%A1%A8
             const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/products`;
+            this.isLoading = true;  // 執行 vue3-loading-overlay 
             this.$http.get(api) 
                 .then((res) => {
+                    this.isLoading = false; // 成功後關閉 vue3-loading-overlay 
                     if(res.data.success){   // 成功時執行
                         // console.log(res.data);
                         this.products = res.data.products;
