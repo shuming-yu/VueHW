@@ -75,8 +75,10 @@ export default {
         DelModal,   
     },
 
+    inject: ['emitter'],
+
     methods: {
-        getProducts() {
+        getProducts() { 
             // 取得商品列表api參考 : https://github.com/hexschool/vue3-course-api-wiki/wiki/%E7%AE%A1%E7%90%86%E6%8E%A7%E5%88%B6%E5%8F%B0-%5B%E9%9C%80%E9%A9%97%E8%AD%89%5D#%E5%8F%96%E5%BE%97%E5%95%86%E5%93%81%E5%88%97%E8%A1%A8
             const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/products`;
             this.isLoading = true;  // 執行 vue3-loading-overlay 
@@ -112,7 +114,7 @@ export default {
             // 建立商品列表api參考 : https://github.com/hexschool/vue3-course-api-wiki/wiki/%E7%AE%A1%E7%90%86%E6%8E%A7%E5%88%B6%E5%8F%B0-%5B%E9%9C%80%E9%A9%97%E8%AD%89%5D#%E5%95%86%E5%93%81%E5%BB%BA%E7%AB%8B
             let api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/product`;
             let httpMethod = 'post';
-
+            
             // 編輯
             // 修改商品列表api參考 : https://github.com/hexschool/vue3-course-api-wiki/wiki/%E7%AE%A1%E7%90%86%E6%8E%A7%E5%88%B6%E5%8F%B0-%5B%E9%9C%80%E9%A9%97%E8%AD%89%5D#%E4%BF%AE%E6%94%B9%E7%94%A2%E5%93%81
             if(!this.isNew){ // 判斷為 false 執行
@@ -127,7 +129,21 @@ export default {
                 .then((res) => {
                     console.log(res);
                     productComponent.hideModal();   // 送出後隱藏表單modal
-                    this.getProducts(); // 重新取得列表資料
+
+                    if(res.data.success) {
+                        this.getProducts(); // 重新取得列表資料
+                        // 自定義事件名稱, (傳送)參數 - 對應 ToastMessages.vue
+                        this.emitter.emit('push-message', {
+                            style: 'success',
+                            title: '更新成功',
+                        })
+                    }else {
+                        this.emitter.emit('push-message', {
+                            style: 'danger',
+                            title: '更新失敗',
+                            content: res.data.message.join('、'),
+                        })
+                    }
                 })
         },
 

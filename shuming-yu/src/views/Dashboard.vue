@@ -1,17 +1,32 @@
 <template>
-
+    
     <Navbar></Navbar>
-    <router-view/>
+    <div class="container-fluid mt-3 position-relative">
+        <ToastMessages></ToastMessages>
+        <router-view/>
+    </div>
 
 </template>
 
 <script>
 import Navbar from '../components/Navbar.vue';
+import emitter from '@/methods/emitter';
+import ToastMessages from '@/components/ToastMessages.vue';
 
 export default {
 
     components: {
         Navbar,
+        ToastMessages,
+    },
+
+    // 外層加入 provide
+    // 內層元件補上 inject
+    // 讓內層元件都可以使用外層功能
+    provide() { // 函式結構 - 響應式
+        return {
+            emitter,
+        }
     },
 
     created() {
@@ -33,6 +48,6 @@ export default {
                         // 測試網址旁將cookie-benToken刪除
                     }
                 })
-    }
+    },
 }
 </script>

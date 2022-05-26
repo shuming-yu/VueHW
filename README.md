@@ -11,14 +11,16 @@ npm -v
 安裝cli套件
 npm install -g @vue/cli
 
-vue cli版本
+Vue cli版本
 vue -V
 
-Windows 上輸入指令出現「因為這個系統上已停用指令碼執行，所以無法載入...」的問題
-參考 : https://israynotarray.com/other/20200510/1067127387/
+## Trouble Shootings
 
-npm版本兼容导致的npm ERR! ERESOLVE
-參考 : https://blog.51cto.com/u_15127660/4530250
+1. Windows 上輸入指令出現「因為這個系統上已停用指令碼執行，所以無法載入...」的問題
+- 參考 : https://israynotarray.com/other/20200510/1067127387/
+
+2. npm版本兼容导致的npm ERR! ERESOLVE
+- 參考 : https://blog.51cto.com/u_15127660/4530250
 
 ## 課程中運用到的指令
 建立專案 vue create {{ 專案名稱 }} ->
