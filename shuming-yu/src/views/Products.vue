@@ -48,15 +48,22 @@
                 @confirm-product="confirmProduct"></ProductModal>
     <!-- 口訣:前內後外 -->
     <!-- addProduct透過props傳送, 內層使用ProductModal.vue(props) -> propProduct 進行接收 -->
+    
     <DelModal ref="delModal"
             :item="addProduct"
             @delProdcut="delProduct"></DelModal>
+    <!-- 對應內層 DelModal.vue, delProdcut觸發delProduct事件 -->
+    
+    <Pagination :pages="pagination"
+                @emit-pages="getProducts"></Pagination>
+    <!-- 對應內層 Pagination.vue, emit-pages觸發getProducts事件 -->
     
 </template>
 
 <script>
 import ProductModal from '../components/ProductModal.vue';
 import DelModal from "../components/DelModal.vue";
+import Pagination from "@/components/Pagination.vue";
 
 export default {
 
@@ -71,24 +78,25 @@ export default {
     },
 
     components: {   //區域註冊
-        ProductModal,   
-        DelModal,   
+        ProductModal,   // 產品元件
+        DelModal,   // 刪除元件
+        Pagination, // 分頁元件   
     },
 
     inject: ['emitter'],
 
     methods: {
-        getProducts() { 
+        getProducts(page = 1) { // 預設頁碼第一頁
             // 取得商品列表api參考 : https://github.com/hexschool/vue3-course-api-wiki/wiki/%E7%AE%A1%E7%90%86%E6%8E%A7%E5%88%B6%E5%8F%B0-%5B%E9%9C%80%E9%A9%97%E8%AD%89%5D#%E5%8F%96%E5%BE%97%E5%95%86%E5%93%81%E5%88%97%E8%A1%A8
-            const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/products`;
+            const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/products?page=${ page }`;
             this.isLoading = true;  // 執行 vue3-loading-overlay 
             this.$http.get(api) 
                 .then((res) => {
                     this.isLoading = false; // 成功後關閉 vue3-loading-overlay 
                     if(res.data.success){   // 成功時執行
-                        // console.log(res.data);
-                        this.products = res.data.products;
-                        this.pagination = res.data.pagination;
+                        console.log(res.data);
+                        this.products = res.data.products;  // 商品資訊
+                        this.pagination = res.data.pagination;  // 分頁資訊
                     }
                 })
         },
