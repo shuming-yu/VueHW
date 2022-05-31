@@ -6,7 +6,7 @@ import VueAxios from 'vue-axios'
 import Loading from 'vue3-loading-overlay';
 import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
 // 載入 千分號方法
-import { currency } from './methods/filters';
+import { date, currency } from './methods/filters';
 import App from './App.vue'
 import router from './router'
 
@@ -14,6 +14,7 @@ const app = createApp(App)
 // globalProperties參考 : https://v3.cn.vuejs.org/api/application-config.html#globalproperties
 // filters 自定義屬性名稱, 前方加入 $ 不會跟區域元件內變數產生衝突
 app.config.globalProperties.$filters = {
+    date,
     currency,
 }
 // use : 安裝插件
