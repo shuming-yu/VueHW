@@ -8,7 +8,7 @@
             </li>
 
             <li class="page-item" v-for="page in pages.total_pages" :key="page"
-                :class="{ 'active' : page == pages.current_page }">
+                :class="{ 'active' : page === pages.current_page }">
                 <!-- 從資料庫傳回頁碼相同, 加入 active 效果 -->
                 <a class="page-link" href="#" @click.prevent="updatePage(page)">
                     {{ page }}
