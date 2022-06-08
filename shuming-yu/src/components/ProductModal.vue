@@ -157,13 +157,13 @@ export default {
             // append 增加欄位到表單
             // api 上傳檔案對應欄位, file-to-upload 欄位名稱對應 input 內的 name 屬性
 
-            const rul = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/upload`;
-            this.$http.post(rul, formData)
+            const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/upload`;
+            this.$http.post(url, formData)
                 .then((res) => {
                     console.log(res.data);  // 檢查 data 內 imageUrl 網址
-                    if(res.success){
+                    if(res.data.success){
                         this.tempProduct.imageUrl = res.data.imageUrl;  // 將 imageUrl 值傳到 tempProduct 物件內
-                        document.getElementById(selectImage).value = '';    // 取得id方式清空value
+                        //document.getElementById(selectImage).value = '';    // 取得id方式清空value
                     }
                 })
         },
@@ -179,6 +179,10 @@ export default {
             // 單向數據流, 不可直接修改外層資料
             // 將外層傳進來資料 propProduct 寫入內層 temProduct
             this.tempProduct = this.propProduct;
+            // 多圖範例
+            if (!this.tempProduct.images) {
+                this.tempProduct.images = [];
+            }
         }
     },
     // created 不一定取得到ref
