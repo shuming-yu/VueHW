@@ -1,9 +1,9 @@
 <template>
     
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-        <router-link class="navbar-brand" href="#" to="/userboard">用戶端頁面</router-link>
-    </div>
+        <div class="container-fluid">
+            <router-link class="navbar-brand" href="#" to="/userboard">用戶端頁面</router-link>
+        </div>
     </nav>
     
     <div class="container-fluid mt-3 position-relative">

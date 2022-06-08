@@ -42,7 +42,7 @@ const routes = [
         component: () => import('../views/UserCart.vue'),
       },
       {
-        path: 'product/:productId',
+        path: 'product/:productId', // 動態路由 : productId 轉化為動態形式
         component: () => import('../views/UserProduct.vue'),
       },
     ],
