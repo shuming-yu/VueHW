@@ -28,7 +28,12 @@
                             查看更多
                     </button>
                     <button type="button" class="btn btn-outline-danger"
-                            >
+                            @click="addToCart(item.id)"
+                            :disabled="this.status.loadingItem === item.id">
+                        <!-- 參考 spinners 讀取效果 : https://bootstrap5.hexschool.com/docs/5.1/components/spinners/ -->
+                        <div v-if="this.status.loadingItem === item.id" class="spinner-grow spinner-grow-sm" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
                             加到購物車
                     </button>
                 </div>
@@ -44,6 +49,9 @@ export default {
         return {
             products: [],   // 產品資訊
             isLoading: false,
+            status: {
+                loadingItem : '',   // 對應品項 id
+            }
         }
     },
 
@@ -59,9 +67,26 @@ export default {
                     this.isLoading = false;
                 })
         },
-        getProduct(id) {
+
+        getProduct(id) {    // 點選取得產品 id 後送到 product 頁面
             this.$router.push(`/userboard/product/${ id }`);
         },
+
+        addToCart(id) {
+            //console.log(id);
+            // 加入購物車api = https://github.com/hexschool/vue3-course-api-wiki/wiki/%E5%AE%A2%E6%88%B6%E8%B3%BC%E7%89%A9-%5B%E5%85%8D%E9%A9%97%E8%AD%89%5D#%E5%8A%A0%E5%85%A5%E8%B3%BC%E7%89%A9%E8%BB%8A
+            const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`;
+            this.status.loadingItem = id;   // 將取得 id 放入, 後續比對用
+            const cart = {
+                product_id : id,    // 將取得 id 放入 product_id
+                qty : 1,    // 預設數量為 1
+            };
+            this.$http.post(api, { data: cart })
+                .then((res) => {
+                    this.status.loadingItem = '';   // 成功後清空
+                    console.log(res); // 確認送出是否成功
+                })
+        }
     },
 
     created() {

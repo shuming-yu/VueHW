@@ -55,6 +55,7 @@ export default {
         },
     },
     created() {
+        // 對應 /router/index.js
         this.id = this.$route.params.productId; // 動態路由存在 params 參數內, 將 productId 參數取出
         this.getProduct();
     },
