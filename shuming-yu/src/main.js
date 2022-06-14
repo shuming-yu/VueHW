@@ -5,6 +5,8 @@ import VueAxios from 'vue-axios'
 // vue-loading-overlay參考 : https://www.npmjs.com/package/vue-loading-overlay
 import Loading from 'vue3-loading-overlay';
 import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
+// bootstrap-icons參考 : https://icons.getbootstrap.com/
+import 'bootstrap-icons/font/bootstrap-icons.css';
 // 載入 千分號方法
 import { date, currency } from './methods/filters';
 import App from './App.vue'

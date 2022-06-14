@@ -67,11 +67,12 @@ export default {
                 product_id: id, 
                 qty: 1, // 預設數量為 1
             };
+            // 加入購物車api = https://github.com/hexschool/vue3-course-api-wiki/wiki/%E5%AE%A2%E6%88%B6%E8%B3%BC%E7%89%A9-%5B%E5%85%8D%E9%A9%97%E8%AD%89%5D#%E5%8A%A0%E5%85%A5%E8%B3%BC%E7%89%A9%E8%BB%8A
             const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`;
             this.$http.post(api, { data: cart })
                 .then((res) => {
                     console.log(res);
-                    this.status.loadingItem = '';
+                    this.status.loadingItem = '';   
                     this.$router.push('/userboard/cart');   // 加入成功後跳回 cart 頁面
                 })
         },
