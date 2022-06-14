@@ -22,7 +22,11 @@
             <div class="h5" v-if="product.price">現在只要 {{ product.price }} 元</div>
             <hr>
             <button type="button" class="btn btn-outline-danger"
-                    @click="addToCart(product.id)">
+                    :disabled="this.status.loadingItem === this.id"
+                    @click="addToCart(this.id)">
+            <div v-if="this.status.loadingItem === this.id" class="spinner-border spinner-border-sm" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
             加到購物車
             </button>
         </div>
@@ -37,6 +41,9 @@ export default {
             product: {},    // 產品資訊
             id: '',
             isLoading: false,
+            status: {
+                loadingItem: '',    // 對應品項 id
+            },
         }
     },
     methods: {
@@ -53,12 +60,29 @@ export default {
                         this.isLoading = false;
                 })
         },
+
+        addToCart(id) {
+            this.status.loadingItem = id;   
+            const cart = {
+                product_id: id, 
+                qty: 1, // 預設數量為 1
+            };
+            const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`;
+            this.$http.post(api, { data: cart })
+                .then((res) => {
+                    console.log(res);
+                    this.status.loadingItem = '';
+                    this.$router.push('/userboard/cart');   // 加入成功後跳回 cart 頁面
+                })
+        },
     },
+
     created() {
         // 對應 /router/index.js
         this.id = this.$route.params.productId; // 動態路由存在 params 參數內, 將 productId 參數取出
         this.getProduct();
     },
+
 }
 // export default {
 //     data() {
