@@ -1,6 +1,8 @@
 <template>
     <Loading :active="isLoading"></Loading>
     <div class="row mt-4">
+
+        <!-- 商品列表 -->
         <div class="col-md-7">
             <table class="table align-middle">
                 <thead>
@@ -31,9 +33,9 @@
                                 </button>
                                 <button type="button" class="btn btn-outline-danger"
                                         @click="addToCart(item.id)"
-                                        :disabled="this.status.loadingItem === item.id">
+                                        :disabled="status.loadingItem === item.id">
                                     <!-- 參考 spinners 讀取效果 : https://bootstrap5.hexschool.com/docs/5.1/components/spinners/ -->
-                                    <div v-if="this.status.loadingItem === item.id" class="spinner-grow spinner-grow-sm" role="status">
+                                    <div v-if="status.loadingItem === item.id" class="spinner-grow spinner-grow-sm" role="status">
                                         <span class="visually-hidden">Loading...</span>
                                     </div>
                                         加到購物車
@@ -44,6 +46,7 @@
                 </tbody>
             </table>
         </div>
+        <!-- 商品列表END -->
 
         <!-- 購物車列表 -->
         <div class="col-md-5">
@@ -58,55 +61,56 @@
                     </tr>
                 </thead>
                 <tbody>
-                <template v-if="cart.carts">
+                <template v-if="cart.carts">    <!-- 判斷陣列存在 -->
                     <tr v-for="item in cart.carts" :key="item.id">
                         <td>
-                        <button type="button" class="btn btn-outline-danger btn-sm"
-                                :disabled="status.loadingItem === item.id"
-                                @click="removeCartItem(item.id)">
-                            <i class="bi bi-trash3"></i>
-                        </button>
+                            <button type="button" class="btn btn-outline-danger btn-sm"
+                                    :disabled="status.loadingItem === item.id"
+                                    @click="removeCartItem(item.id)">
+                                <i class="bi bi-trash3"></i>
+                            </button>
                         </td>
                         <td>
-                        {{ item.product.title }}
-                        <div class="text-success" v-if="item.coupon">
-                            已套用優惠券
-                        </div>
+                            {{ item.product.title }}
+                            <div class="text-success" v-if="item.coupon">
+                                已套用優惠券
+                            </div>
                         </td>
                         <td>
-                        <div class="input-group input-group-sm">
-                            <input type="number" class="form-control"
-                                min="1"
-                                :disabled="item.id === status.loadingItem"
-                                @change="updateCart(item)"
-                                v-model.number="item.qty">
-                            <div class="input-group-text">/ {{ item.product.unit }}</div>
-                        </div>
+                            <div class="input-group input-group-sm">
+                                <!-- min 設定輸入最小為 1 -->
+                                <input type="number" class="form-control"
+                                    min="1"
+                                    :disabled="item.id === status.loadingItem"
+                                    @change="updateCart(item)"
+                                    v-model.number="item.qty">
+                                <div class="input-group-text">/ {{ item.product.unit }}</div>
+                            </div>
                         </td>
                         <td class="text-end">
-                        <small v-if="cart.final_total !== cart.total" class="text-success">折扣價：</small>
-                        {{ $filters.currency(item.final_total) }}
+                            <small v-if="cart.final_total !== cart.total" class="text-success">折扣價：</small>
+                            {{ $filters.currency(item.final_total) }}
                         </td>
                     </tr>
                 </template>
                 </tbody>
                 <tfoot>
                 <tr>
-                <td colspan="3" class="text-end">總計</td>
-                <td class="text-end">{{ $filters.currency(cart.total) }}</td>
+                    <td colspan="3" class="text-end">總計</td>
+                    <td class="text-end">{{ $filters.currency(cart.total) }}</td>
                 </tr>
                 <tr v-if="cart.final_total !== cart.total">
-                <td colspan="3" class="text-end text-success">折扣價</td>
-                <td class="text-end text-success">{{ $filters.currency(cart.final_total) }}</td>
+                    <td colspan="3" class="text-end text-success">折扣價</td>
+                    <td class="text-end text-success">{{ $filters.currency(cart.final_total) }}</td>
                 </tr>
                 </tfoot>
             </table>
             <div class="input-group mb-3 input-group-sm">
                 <input type="text" class="form-control" v-model="coupon_code" placeholder="請輸入優惠碼">
                 <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="button" @click="addCouponCode">
-                    套用優惠碼
-                </button>
+                    <button class="btn btn-outline-secondary" type="button" @click="addCouponCode">
+                        套用優惠碼
+                    </button>
                 </div>
             </div>
             </div>
@@ -177,6 +181,21 @@ export default {
                 })
         },
 
+        updateCart(item) {
+            this.status.loadingItem = item.id;
+            // 更新購物車api = https://github.com/hexschool/vue3-course-api-wiki/wiki/%E5%AE%A2%E6%88%B6%E8%B3%BC%E7%89%A9-%5B%E5%85%8D%E9%A9%97%E8%AD%89%5D#%E6%9B%B4%E6%96%B0%E8%B3%BC%E7%89%A9%E8%BB%8A
+            const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${item.id}`;
+            const cart = {                      // id - 單一品項 id
+                product_id: item.product_id,    // product_id - 產品 id
+                qty: item.qty,  // 更新後數量
+            };
+            this.$http.put(api, { data: cart })
+                .then((res) => {
+                    // console.log(res);
+                    this.status.loadingItem = '';   // 觸發 disable 動作(使用者無法狂點)
+                    this.getCart(); // 重整購物車列表
+                })
+        }
     },
 
     created() {

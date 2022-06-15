@@ -1,7 +1,7 @@
 <template>
   <!-- <nav>
     <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+    <router-link to="/about">About</router-link>  
   </nav> -->
   <!-- <button type="button" class="btn btn-primary">Primary</button>
   <button type="button" class="btn btn-secondary">Secondary</button>
@@ -14,7 +14,7 @@
   <button type="button" class="btn btn-link">Link</button> -->
   <!-- bootstrap classname 版面間距 -->
   <div class="container-fluid">
-  <router-view/>
+  <router-view/>  <!-- 頁面切換 -->
   </div>
 </template>
 

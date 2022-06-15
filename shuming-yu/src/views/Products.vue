@@ -70,18 +70,18 @@ export default {
 
     data() {
         return {
-            products: [],   // 產品資訊
+            products: [],   // 全部產品資訊
             pagination: {}, // 分頁
-            addProduct: {}, // 外層product
+            addProduct: {}, // 外層 product
             isNew: false,   // 提供 openModal 判斷
-            isLoading: false,   // 提供 vue3-loading-overlay 
+            isLoading: false,   // 提供 vue3-loading-overlay
         }
     },
 
     components: {   //區域註冊
         ProductModal,   // 產品元件
         DelModal,   // 刪除元件
-        Pagination, // 分頁元件   
+        Pagination, // 分頁元件
     },
 
     inject: ['emitter'],

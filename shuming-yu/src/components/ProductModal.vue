@@ -133,7 +133,7 @@ import modalMixin from "../mixins/modalMixins";
 export default {
     data() {
         return {
-            modal: {},  
+            modal: {},  // Bootstrap Modal 實體化
             tempProduct: {},    // 外層資料傳送接收
         }
     },
