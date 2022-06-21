@@ -28,11 +28,17 @@
         <span class="navbar-text">
             Navbar text with an inline element
         </span> -->
-            <div class="navbar-nav">
-                <router-link class="nav-link active" to="/dashboard/products">產品</router-link>
+            <div class="navbar-nav active">
+                <router-link class="nav-link" to="/dashboard/products">產品</router-link>
                 <router-link class="nav-link" to="/dashboard/orders">訂單</router-link>
+                <router-link class="nav-link" to="/dashboard/coupons">優惠券</router-link>
 
                 <a class="nav-link" href="#" @click.prevent="logout">登出</a>
+            </div>
+
+            <div class="navbar-nav ms-auto">
+                <router-link class="nav-link" to="/userboard/cart">用戶端產品</router-link>
+
             </div>
         </div>
     </div>

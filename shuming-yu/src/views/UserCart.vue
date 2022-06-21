@@ -118,9 +118,12 @@
         <!-- 購物車列表END -->
     </div>
 
+
 </template>
 
 <script>
+import DelModal from '@/components/DelModal.vue';
+
 export default {
     data() {
         return {
@@ -132,6 +135,10 @@ export default {
             cart: {},   // 購物車列表資訊
             coupon_code: '',    // 優惠碼
         }
+    },
+
+    components: {
+        DelModal,
     },
 
     methods: {
@@ -166,6 +173,7 @@ export default {
                     this.isLoading = false;
                     this.status.loadingItem = '';   // 成功後清空
                     console.log(res); // 確認送出是否成功
+                    this.getCart(); // 重整購物車列表
                 })
         },
 
@@ -194,6 +202,18 @@ export default {
                     // console.log(res);
                     this.status.loadingItem = '';   // 觸發 disable 動作(使用者無法狂點)
                     this.getCart(); // 重整購物車列表
+                })
+        },
+
+        removeCartItem(id) {
+            this.status.loadingItem = id;
+            // 刪除某一筆購物車資料 api = https://github.com/hexschool/vue3-course-api-wiki/wiki/%E5%AE%A2%E6%88%B6%E8%B3%BC%E7%89%A9-%5B%E5%85%8D%E9%A9%97%E8%AD%89%5D#%E5%88%AA%E9%99%A4%E6%9F%90%E4%B8%80%E7%AD%86%E8%B3%BC%E7%89%A9%E8%BB%8A%E8%B3%87%E6%96%99
+            const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${id}`;
+            this.$http.delete(api)
+                .then((res) => {
+                    //console.log(res);
+                    this.status.loadingItem = '';
+                    this.getCart();
                 })
         }
     },
