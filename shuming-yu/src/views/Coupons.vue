@@ -1,4 +1,5 @@
 <template>
+    <Loading :active="isLoading"></Loading>
     <div class="text-end">
         <button class="btn btn-primary" type="button"
                 @click="openCouponModal">
@@ -17,11 +18,12 @@
             </tr>
         </thead>
         <tbody>
-            <tr v-for="(item, key) in coupons" :key="key">
+            <tr v-for="(item, key) in coupons" :key="'item' + key">
                 <td>{{ item.title }}</td>
                 <td>{{ item.percent }}</td>
                 <td class="text-right">
                     {{ $filters.date(item.due_date) }}
+                    <!-- 引用 filter.js 內的函式 date -->
                 </td>
                 <td>
                     <span class="text-success" v-if="item.is_enabled === 1">啟用</span>
@@ -53,11 +55,12 @@ export default {
             pagination: {}, // 分頁
             tempCoupon: {
                 title: '',  // 標題
-                is_enabled: 0,  // 啟用
-                percent: 100,   // 折扣百分比
-                code: '',   // 優惠馬
+                is_enabled: 0,  // 是否啟用
+                percent: 100,   // 折扣百分比,預設 100
+                code: '',   // 優惠碼
             },
             isNew: false,
+            isLoading: false,
         };
     },
 
@@ -67,21 +70,26 @@ export default {
 
     methods: {
         getCoupons() {
+            this.isLoading = true;
             const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/coupons`;
             this.$http.get(api)
                 .then((res) => {
-                    //console.log(res.data);
+                    console.log(res.data.coupons);
                     this.coupons = res.data.coupons;
+                    this.isLoading = false;
                 })
         },
 
         openCouponModal() {
+            this.tempCoupon = {
+                due_date: new Date().getTime() / 1000,
+            };
             const CouponModal = this.$refs.couponModal;
             CouponModal.showModal();
         },
 
         confirmCoupon(item) {
-            // gotCoupon 透過參數方式傳入 item
+            // CouponModal-> gotCoupon 透過參數方式傳入 item
             //console.log(item);
             this.tempCoupon = item;
             const CouponModal = this.$refs.couponModal;
@@ -90,7 +98,7 @@ export default {
             this.$http.post(url, { data: this.tempCoupon })
                 .then((res) =>{
                     console.log(res);
-                    this.getCoupons();
+                    this.getCoupons();  // 重新取得優惠券資訊
                     CouponModal.hideModal();
                 })
         },

@@ -63,7 +63,7 @@ export default {
     data() {
         return{
             modal: {},
-            gotCoupon: {},
+            gotCoupon: {},  // 外層傳進來資料放置區
             due_date: '',
         }
     },
@@ -77,11 +77,11 @@ export default {
 
     watch: {
         propCoupon() {
-            this.gotCoupon = this.propCoupon;
+            this.gotCoupon = this.propCoupon;   // 內層 gotCoupon 指向外層傳進來的 props -> propCoupon
 
             // 將時間格式改為 YYYY-MM-DD
-            console.log(this.tempCoupon.due_date);
-            const dateAndTime = new Date(this.tempCoupon.due_date * 1000)
+            //console.log(this.propCoupon.due_date);
+            const dateAndTime = new Date(this.propCoupon.due_date * 1000)
                 .toISOString().split('T');
             [this.due_date] = dateAndTime;
         },

@@ -119,6 +119,7 @@ export default {
 
         confirmProduct(item) {  // 點選Modal確認按鈕執行
             // console.log(item);  // 可先註解下方程式, 確認參數是否正確傳遞
+            // ProductModal->tempProduct 透過參數方式傳入 item
             this.addProduct = item;
 
             // 新增

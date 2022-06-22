@@ -178,6 +178,7 @@ export default {
         propProduct() { // 監聽 propProduct 有無變動
             // 單向數據流, 不可直接修改外層資料
             // 將外層傳進來資料 propProduct 寫入內層 temProduct
+            // 內層 tempProduct 指向外層傳進來的 props -> propProduct
             this.tempProduct = this.propProduct;
             // 多圖範例
             if (!this.tempProduct.images) {
