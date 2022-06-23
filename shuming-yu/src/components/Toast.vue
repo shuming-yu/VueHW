@@ -12,6 +12,7 @@
 </template>
 
 <script>
+// 參考 Bootstrap Toasts = https://bootstrap5.hexschool.com/docs/5.1/components/toasts/
 import Toast from 'bootstrap/js/dist/toast';
 
 export default {

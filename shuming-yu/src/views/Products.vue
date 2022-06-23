@@ -153,7 +153,7 @@ export default {
                         this.emitter.emit('push-message', {
                             style: 'danger',
                             title: '更新失敗',
-                            content: res.data.message.join('、'),
+                            content: res.data.message.join('、'),   // 失敗訊息內容
                         })
                     }
                 })
