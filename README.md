@@ -75,6 +75,10 @@ shuming-yu(專案名稱) -> .gitignore 檔案將 /dist 刪除後 (dist檔案就�
 
 vue ui  ->  設定  ->  Vue CLI  ->  公開路徑新增 /Vue/shuming-yu(專案名稱)/dist/ -> 保存修改
 
+&
+
+vue.config.js -> add publicPath: '/VueDemo/dist'
+
 確認 dist 檔案下 -> index.html 內的檔案路徑更改為 /Vue/shuming-yu/dist/js
 
 後續 GitHub Pages 測試
