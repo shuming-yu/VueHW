@@ -213,7 +213,19 @@ export default {
                 .then((res) => {
                     //console.log(res);
                     this.status.loadingItem = '';
-                    this.getCart();
+                    this.getCart(); // 重整購物車列表
+                })
+        },
+
+        addCouponCode() {
+            const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/coupon`;
+            const coupon = {
+                code : this.coupon_code,
+            };
+            this.$http.post(url, { data : coupon })
+                .then((res) => {
+                    console.log(res);
+                    this.getCart(); // 重整購物車列表
                 })
         }
     },
