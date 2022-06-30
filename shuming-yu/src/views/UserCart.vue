@@ -116,8 +116,74 @@
             </div>
         </div>
         <!-- 購物車列表END -->
-    </div>
 
+        <!-- 用戶訂單 -->
+        <div class="my-5 row justify-content-center">
+            <VForm class="col-md-6" v-slot="{ errors }"
+                    @submit="createOrder">
+                {{ errors }}
+                <!-- v-slot 把元件本身的資源提取出來使用 -->
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <!-- input 因為改成元件，必須包含頭尾的標籤 -->
+                    <!-- :class 的 errors[] 中的值對應 name -->
+                    <VField id="email" name="Email" type="email" class="form-control"
+                            placeholder="請輸入 Email" rules="email|required"
+                            :class="{ 'is-invalid': errors['Email'] }"
+                            v-model="form.user.email">
+                    </VField>
+                    <!-- VField & ErrorMessage name欄位互相對應 -->
+                    <ErrorMessage name="Email" class="invalid-feedback"></ErrorMessage>
+                </div>
+
+                <div class="mb-3">
+                    <label for="name" class="form-label">收件人姓名</label>
+                    <VField id="name" name="姓名" type="text" class="form-control"
+                            placeholder="請輸入姓名" rules="required"
+                            :class="{ 'is-invalid': errors['姓名'] }"
+                            v-model="form.user.name">
+                    </VField>
+                    <ErrorMessage name="姓名" class="invalid-feedback"></ErrorMessage>
+                </div>
+
+                <div class="mb-3">
+                    <label for="tel" class="form-label">收件人電話</label>
+                    <VField id="tel" name="電話" type="tel" class="form-control"
+                            placeholder="請輸入電話" :rules="isPhone"
+                            :class="{ 'is-invalid': errors['電話'] }"
+                            v-model="form.user.tel">
+                    </VField>
+                    <ErrorMessage name="電話" class="invalid-feedback"></ErrorMessage>
+                </div>
+
+                <div class="mb-3">
+                    <label for="address" class="form-label">收件人地址</label>
+                    <VField id="address" name="地址" type="text" class="form-control"
+                            placeholder="請輸入地址" rules="required"
+                            :class="{ 'is-invalid': errors['地址'] }"
+                            v-model="form.user.address">
+                    </VField>
+                    <ErrorMessage name="地址" class="invalid-feedback"></ErrorMessage>
+                </div>
+
+                <div class="mb-3">
+                    <label for="message" class="form-label">留言</label>
+                    <textarea name="" id="message" class="form-control" cols="30" rows="10"
+                            :class="{ 'is-invalid': errors['留言'] }"
+                            v-model="form.message"></textarea>
+                </div>
+                <div class="text-end">
+                    <!--       
+                    如果要觸發 submit 驗證，需綁定事件在外層的 form 標籤上
+                    所以這邊的 button 不需要綁上方法
+                    -->
+                    <button class="btn btn-danger">送出訂單</button>
+                </div>
+            </VForm>
+        </div>
+        <!-- 用戶訂單END -->
+        
+    </div>
 
 </template>
 
@@ -134,6 +200,16 @@ export default {
             },
             cart: {},   // 購物車列表資訊
             coupon_code: '',    // 優惠碼
+
+            form: { // 使用者訂單資訊
+                user: {
+                    name: '',
+                    tel: '',
+                    email: '',
+                    address: '',
+                },
+                message: '',
+            },
         }
     },
 
@@ -218,6 +294,7 @@ export default {
         },
 
         addCouponCode() {
+            // 套用優惠券 api = https://github.com/hexschool/vue3-course-api-wiki/wiki/%E5%AE%A2%E6%88%B6%E8%B3%BC%E7%89%A9-%5B%E5%85%8D%E9%A9%97%E8%AD%89%5D#%E5%A5%97%E7%94%A8%E5%84%AA%E6%83%A0%E5%88%B8
             const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/coupon`;
             const coupon = {
                 code : this.coupon_code,
@@ -227,7 +304,23 @@ export default {
                     console.log(res);
                     this.getCart(); // 重整購物車列表
                 })
-        }
+        },
+
+        // VeeValiadation 參考 : https://hackmd.io/FFv0a5cBToOATP7uI5COMQ
+        createOrder() { // 送出訂單
+            // 結帳頁面 api = https://github.com/hexschool/vue3-course-api-wiki/wiki/%E5%AE%A2%E6%88%B6%E8%B3%BC%E7%89%A9-%5B%E5%85%8D%E9%A9%97%E8%AD%89%5D#%E7%B5%90%E5%B8%B3%E9%A0%81%E9%9D%A2
+            const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/order`;
+            const order = this.form;
+            this.$http.post(url, { data: order })
+                .then((res) => {
+                    console.log(res);
+                })
+
+        },
+        isPhone(value) {    // 電話規則
+            const phoneNumber = /^(09)[0-9]{8}$/
+            return phoneNumber.test(value) ? true : '請輸入正確的電話號碼'
+        },
     },
 
     created() {
