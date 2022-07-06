@@ -49,6 +49,10 @@ const routes = [
         path: 'product/:productId', // 動態路由 : productId 轉化為動態形式
         component: () => import('../views/UserProduct.vue'),
       },
+      {
+        path: 'checkout/:orderId', // 動態路由 : productId 轉化為動態形式
+        component: () => import('../views/UserCheckout.vue'),
+      },
     ],
   }
 ]
