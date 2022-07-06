@@ -1,45 +1,41 @@
 # shuming-yu
 
-## Project setup
-```
-npm install
-```
+## 相關課程資源
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+### Bootstrap
 
-### Compiles and minifies for production
-```
-npm run build
-```
+- Bootstrap : https://getbootstrap.com/
+- Bootstrap 六角學院 : https://bootstrap5.hexschool.com/
 
-### Lints and fixes files
-```
-npm run lint
-```
+### Material Design
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+- Material Design : https://material.io/design
+- 六角翻譯版 : https://material-design.hexschool.io/
+
+### 素材資源
+
+- 圖庫 : https://unsplash.com/
+- Material Design Icon : https://fonts.google.com/icons
+- Bootstrap Icon : https://icons.getbootstrap.com/#icons
+- FontAwesome : https://fontawesome.com/
+- 付費 icon : https://www.flaticon.com/
+- 字體（無襯線 san-serif、黑體）: https://www.google.com/get/noto/
 
 ## 課程需要安裝套件
 
-1. Bootstrap 六角學院 : https://bootstrap5.hexschool.com/
+1. Vue-axios : https://www.npmjs.com/package/vue-axios
 
-2. Vue-axios : https://www.npmjs.com/package/vue-axios
+2. Vue3-loading-overlay : https://www.npmjs.com/package/vue-loading-overlay
 
-3. Vue3-loading-overlay : https://www.npmjs.com/package/vue-loading-overlay
+3. mitt : https://www.npmjs.com/package/mitt
 
-4. mitt : https://www.npmjs.com/package/mitt
+4. Bootstrap Icons : https://icons.getbootstrap.com/
 
-5. Bootstrap Icons : https://icons.getbootstrap.com/
+5. vee-validate : https://vee-validate.logaretm.com/v4/guide/overview#using-npm
 
-6. vee-validate : https://vee-validate.logaretm.com/v4/guide/overview#using-npm
+6. vee-validate/rules : https://vee-validate.logaretm.com/v4/guide/global-validators#vee-validaterules
 
-7. vee-validate/rules : https://vee-validate.logaretm.com/v4/guide/global-validators#vee-validaterules
-
-8. vee-validate/i18n : https://vee-validate.logaretm.com/v4/guide/i18n#using-vee-validatei18n
+7. vee-validate/i18n : https://vee-validate.logaretm.com/v4/guide/i18n#using-vee-validatei18n
 
 ## 課程 API 文件及相關資源
 
@@ -84,3 +80,4 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 - const token = document.cookie.replace(/(?:(?:^|.*;\s*)hexToken\s*=\s*([^;]*).*$)|^.*$/, '$1');
 - this.$http.defaults.headers.common.Authorization = `${token}`;
+

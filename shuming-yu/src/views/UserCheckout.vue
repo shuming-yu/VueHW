@@ -87,6 +87,7 @@ export default {
           })
     },
     payOrder() {
+      // 結帳付款 api = https://github.com/hexschool/vue3-course-api-wiki/wiki/%E5%AE%A2%E6%88%B6%E8%B3%BC%E7%89%A9-%5B%E5%85%8D%E9%A9%97%E8%AD%89%5D#%E7%B5%90%E5%B8%B3%E4%BB%98%E6%AC%BE
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/pay/${this.orderId}`;
       this.isLoading = true;
       this.$http.post(url)
