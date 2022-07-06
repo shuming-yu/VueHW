@@ -1,26 +1,30 @@
 <template>
-    <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-center">
-            <li class="page-item">
-                <a class="page-link" href="#" aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
-                </a>
-            </li>
+  <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+      <li class="page-item">
+        <a class="page-link" href="#" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
 
-            <li class="page-item" v-for="page in pages.total_pages" :key="page"
-                :class="{ 'active' : page === pages.current_page }">
-                <!-- 從資料庫傳回頁碼相同, 加入 active 效果 -->
-                <a class="page-link" href="#" @click.prevent="updatePage(page)">
-                    {{ page }}
-                </a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" href="#" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
+      <li
+        class="page-item"
+        v-for="page in pages.total_pages"
+        :key="page"
+        :class="{ active: page === pages.current_page }"
+      >
+        <!-- 從資料庫傳回頁碼相同, 加入 active 效果 -->
+        <a class="page-link" href="#" @click.prevent="updatePage(page)">
+          {{ page }}
+        </a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="#" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
 </template>
 
 <script>
@@ -28,14 +32,13 @@
 // :pages="{ 頁碼資訊 }"
 // @emitPages="更新頁面事件"
 export default {
+  props: ["pages"],
 
-    props: ['pages'],
-    
-    methods: {
-        updatePage(page) {  // page = 頁碼
-            this.$emit('emit-pages', page);
-        },
+  methods: {
+    updatePage(page) {
+      // page = 頁碼
+      this.$emit("emit-pages", page);
     },
-
+  },
 };
 </script>
