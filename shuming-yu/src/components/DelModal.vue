@@ -19,9 +19,12 @@
             aria-label="Close"
           ></button>
         </div>
-        <div class="modal-body">
+        <div class="modal-body" v-if="item.title">
           您確定要刪除產品名稱為
           <strong class="text-danger">{{ item.title }}</strong> (刪除後無法復原)
+        </div>
+        <div class="modal-body" v-else>
+          您確定要刪除此筆訂單嗎? (刪除後無法復原)
         </div>
         <div class="modal-footer">
           <button

@@ -1,5 +1,5 @@
 <template>
-
+  <Loading :active="isLoading"></Loading>
   <table class="table mt-4">
     <thead>
       <tr>
@@ -31,7 +31,7 @@
           <td>
             <div class="btn-group">
               <button class="btn btn-outline-primary btn-sm" @click="openOrderModal(false, item)">檢視</button>
-              <button class="btn btn-outline-danger btn-sm">刪除</button>
+              <button class="btn btn-outline-danger btn-sm" @click="opendelModal(item)">刪除</button>
             </div>
           </td>
         </tr>
@@ -41,10 +41,14 @@
   <OrderModal ref="orderModal"
               :propOrder="tempOrder"
               @confirm-order="confirmOrder"></OrderModal>
+  <DelModal ref="delModal"
+            :item="tempOrder"
+            @delProdcut="delOrder"></DelModal>
 </template>
 
 <script>
 import OrderModal from "@/components/OrderModal.vue";
+import DelModal from "@/components/DelModal.vue";
 
 export default {
 
@@ -54,19 +58,23 @@ export default {
       pagination: {}, // 分頁
       tempOrder: {},  // 外層資料傳送接收
       isNew: false,
+      isLoading: false,
     };
   },
 
   components: {
     OrderModal,
+    DelModal,
   },
 
   methods: {
-    
+    //取得訂單列表 api = https://github.com/hexschool/vue3-course-api-wiki/wiki/%E7%AE%A1%E7%90%86%E6%8E%A7%E5%88%B6%E5%8F%B0-%5B%E9%9C%80%E9%A9%97%E8%AD%89%5D#%E5%8F%96%E5%BE%97%E8%A8%82%E5%96%AE%E5%88%97%E8%A1%A8
     getOrders() {
+      this.isLoading = true;
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/orders`;
       this.$http.get(api).then((res) => {
         // console.log(res.data);
+        this.isLoading = false;
         this.orders = res.data.orders;
         this.pagination = res.data.pagination;
         console.log(this.orders);
@@ -83,14 +91,31 @@ export default {
     },
 
     confirmOrder(item) {
-      this.tempOrder = item;
-
+      //修改訂單 api = https://github.com/hexschool/vue3-course-api-wiki/wiki/%E7%AE%A1%E7%90%86%E6%8E%A7%E5%88%B6%E5%8F%B0-%5B%E9%9C%80%E9%A9%97%E8%AD%89%5D#%E4%BF%AE%E6%94%B9%E8%A8%82%E5%96%AE
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/orders/${ item.id }`;
-      this.$http.put(api, { data: this.tempOrder })
+      this.$http.put(api, { data: item })
           .then((res) =>{
             console.log(res);
           })
     },
+
+    opendelModal(item) {
+      this.tempOrder = { ...item };
+      const opendelModal = this.$refs.delModal;
+      opendelModal.showModal();
+    },
+    delOrder() {
+      //刪除訂單 api = https://github.com/hexschool/vue3-course-api-wiki/wiki/%E7%AE%A1%E7%90%86%E6%8E%A7%E5%88%B6%E5%8F%B0-%5B%E9%9C%80%E9%A9%97%E8%AD%89%5D#%E5%88%AA%E9%99%A4%E8%A8%82%E5%96%AE
+      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/order/${ this.tempOrder.id }`;
+      this.$http.delete(api)
+          .then((res) => {
+            console.log(res);
+            this.getOrders();
+            const opendelModal = this.$refs.delModal;
+            opendelModal.hideModal();
+          })
+    },
+
   },
 
   created() {

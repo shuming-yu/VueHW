@@ -97,6 +97,7 @@ export default {
               this.isLoading = false;
               this.getOrder();
               // 付款完成後, 可確認 this.order 內的 is_paid 是否為 true
+              //this.$router.push('/userboard/cart');
             }
           })
     },
