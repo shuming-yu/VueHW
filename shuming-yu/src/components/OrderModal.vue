@@ -66,7 +66,7 @@
                   <tr>
                     <th>總金額</th>
                     <td>
-                      {{ $filters.currency(gotOrder.total) }}
+                      {{ $filters.currency(gotOrder.total) }} $
                     </td>
                   </tr>
                 </tbody>
@@ -86,7 +86,7 @@
                       {{ item.qty }} / {{ item.product.unit }}
                     </td>
                     <td class="text-end">
-                      {{ item.total}}
+                      {{ $filters.currency(item.total) }} $
                     </td>
                   </tr>
                 </tbody>
@@ -114,6 +114,7 @@ export default {
     return {
       modal: {},
       gotOrder: {},
+      is_paid: false, // 預設狀態 未付款
     };
   },
 
@@ -129,6 +130,7 @@ export default {
   watch: {
     propOrder() {
       this.gotOrder = this.propOrder;
+      this.is_paid = this.gotOrder.is_paid;
       console.log(this.gotOrder);
     }
   },

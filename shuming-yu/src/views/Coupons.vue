@@ -30,7 +30,7 @@
         </td>
         <td>
           <span class="text-success" v-if="item.is_enabled === 1">啟用</span>
-          <span class="text-muted" v-else>未啟用</span>
+          <span class="text-danger" v-else>未啟用</span>
         </td>
         <td>
           <div class="btn-group">

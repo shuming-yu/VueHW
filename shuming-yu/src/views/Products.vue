@@ -102,7 +102,7 @@ export default {
     getProducts(page = 1) {
       // 預設頁碼第一頁
       // 取得商品列表api參考 : https://github.com/hexschool/vue3-course-api-wiki/wiki/%E7%AE%A1%E7%90%86%E6%8E%A7%E5%88%B6%E5%8F%B0-%5B%E9%9C%80%E9%A9%97%E8%AD%89%5D#%E5%8F%96%E5%BE%97%E5%95%86%E5%93%81%E5%88%97%E8%A1%A8
-      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/products?page=${page}`;
+      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/products?page=${ page }`;
       this.isLoading = true; // 執行 vue3-loading-overlay
       this.$http.get(api).then((res) => {
         this.isLoading = false; // 成功後關閉 vue3-loading-overlay

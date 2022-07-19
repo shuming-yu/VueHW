@@ -23,10 +23,17 @@
               </li>
             </ul>
           </td>
-          <td class="text-right">{{ $filters.currency(item.total) }}</td>
+          <td class="text-right">{{ $filters.currency(item.total) }} $</td>
           <td>
-            <span class="text-success" v-if="item.is_paid == true">已付款</span>
-            <span class="text-danger" v-else>未付款</span>
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" :id="`paidSwitch${item.id}`"
+                      v-model="item.is_paid"
+                      @change="confirmOrder(item)">
+              <label class="form-check-label" :for="`paidSwitch${item.id}`">
+                <span class="text-success" v-if="item.is_paid">已付款</span>
+                <span class="text-danger" v-else>未付款</span>
+              </label>
+            </div>
           </td>
           <td>
             <div class="btn-group">
@@ -44,11 +51,14 @@
   <DelModal ref="delModal"
             :item="tempOrder"
             @delProdcut="delOrder"></DelModal>
+  <Pagination :pages="pagination"
+              @emit-pages="getOrders"></Pagination>
 </template>
 
 <script>
 import OrderModal from "@/components/OrderModal.vue";
 import DelModal from "@/components/DelModal.vue";
+import Pagination from "@/components/Pagination.vue";
 
 export default {
 
@@ -62,16 +72,19 @@ export default {
     };
   },
 
+  inject: ["emitter"],
+
   components: {
     OrderModal,
     DelModal,
+    Pagination,
   },
 
   methods: {
     //取得訂單列表 api = https://github.com/hexschool/vue3-course-api-wiki/wiki/%E7%AE%A1%E7%90%86%E6%8E%A7%E5%88%B6%E5%8F%B0-%5B%E9%9C%80%E9%A9%97%E8%AD%89%5D#%E5%8F%96%E5%BE%97%E8%A8%82%E5%96%AE%E5%88%97%E8%A1%A8
-    getOrders() {
+    getOrders(page = 1) {
       this.isLoading = true;
-      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/orders`;
+      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/orders?page=${ page }`;
       this.$http.get(api).then((res) => {
         // console.log(res.data);
         this.isLoading = false;
@@ -91,11 +104,29 @@ export default {
     },
 
     confirmOrder(item) {
+      const paid = {
+        is_paid: item.is_paid,
+      };
       //修改訂單 api = https://github.com/hexschool/vue3-course-api-wiki/wiki/%E7%AE%A1%E7%90%86%E6%8E%A7%E5%88%B6%E5%8F%B0-%5B%E9%9C%80%E9%A9%97%E8%AD%89%5D#%E4%BF%AE%E6%94%B9%E8%A8%82%E5%96%AE
-      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/orders/${ item.id }`;
-      this.$http.put(api, { data: item })
+      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/order/${ item.id }`;
+      this.$http.put(api, { data: paid })
           .then((res) =>{
             console.log(res);
+            if(res.data.success) {
+              this.emitter.emit('push-message', {
+                style: 'success',
+                title: '更新訂單資訊成功',
+              })
+            }else{
+              this.emitter.emit('push-message', {
+                style: 'danger',
+                title: '更新訂單資訊失敗',
+                content: res.data.message.join("、"), // 失敗訊息內容
+              })
+            }
+            this.getOrders();
+            const openModal = this.$refs.orderModal;
+            openModal.hideModal();
           })
     },
 
