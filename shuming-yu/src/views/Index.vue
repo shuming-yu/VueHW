@@ -21,7 +21,7 @@
           </li>
         </ul> -->
         <div class="navbar-nav ms-auto mb-2 mb-lg-0 me-2">
-          <router-link class="nav-link active" to="/dashboard/products"
+          <router-link class="nav-link active" to="/"
             >首頁</router-link
           >
           <router-link class="nav-link" to="/userboard/cart"

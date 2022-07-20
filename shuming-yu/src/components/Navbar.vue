@@ -2,7 +2,7 @@
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
       <!-- <a class="navbar-brand" href="#">Ben 後台</a> -->
-      <router-link class="navbar-brand" href="#" to="/dashboard"
+      <router-link class="navbar-brand" href="#" to="/dashboard/products"
         >Ben 後台</router-link
       >
 
