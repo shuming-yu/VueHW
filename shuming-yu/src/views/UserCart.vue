@@ -160,6 +160,9 @@
             </button>
           </div>
         </div>
+        <!-- <div class="d-flex justify-content-center">
+          <button type="button" class="btn btn-primary">清空購物車</button>
+        </div> -->
       </div>
     </div>
     <!-- 購物車列表END -->

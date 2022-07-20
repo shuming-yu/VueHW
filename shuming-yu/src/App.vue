@@ -13,9 +13,9 @@
   <button type="button" class="btn btn-dark">Dark</button>
   <button type="button" class="btn btn-link">Link</button> -->
   <!-- bootstrap classname 版面間距 -->
-  <div class="container-fluid">
+  <!-- <div class="container-fluid">
+  </div> -->
   <router-view/>  <!-- 頁面切換 -->
-  </div>
 </template>
 
 <style lang="scss">
