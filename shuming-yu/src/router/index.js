@@ -59,7 +59,13 @@ const routes = [
         component: () => import('../views/UserCheckout.vue'),
       },
     ],
-  }
+  },
+  /* 重新導向說明：https://next.router.vuejs.org/guide/essentials/dynamic-matching.html#catch-all-404-not-found-route */
+  // 404頁面
+  {
+    path: '/:pathMatch(.*)*',
+    component: () => import('../views/NotFound.vue'),
+  },
 ]
 
 const router = createRouter({
