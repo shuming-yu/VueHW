@@ -10,6 +10,9 @@ import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 // 載入 千分號方法
 import { date, currency } from './methods/filters';
+// 引用 bootstrap collapse
+import 'bootstrap/js/src/collapse';
+
 
 // VeeValiadation 參考 : https://hackmd.io/FFv0a5cBToOATP7uI5COMQ
 // 匯入 vee-validate 主套件 : https://vee-validate.logaretm.com/v4/guide/overview#using-npm

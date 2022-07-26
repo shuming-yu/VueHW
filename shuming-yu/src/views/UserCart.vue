@@ -4,7 +4,7 @@
   <header class="header" style="background-image: url(https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80); height: 300px">
     <div class="container d-flex justify-content-center align-items-center h-100">
       <div class="row">
-        <h1 class="text-white bg-secondary bg-opacity-50 rounded-pill">商品列表</h1>
+        <h1 class="text-white bg-secondary bg-opacity-75 rounded-pill">商品列表</h1>
       </div>
     </div>
   </header>

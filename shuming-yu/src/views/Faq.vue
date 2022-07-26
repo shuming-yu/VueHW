@@ -2,7 +2,7 @@
   <header class="header" style="background-image: url(https://images.unsplash.com/photo-1507842217343-583bb7270b66?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1590&q=80); height: 300px">
     <div class="container d-flex justify-content-center align-items-center h-100">
       <div class="row">
-        <h1 class="text-white bg-secondary bg-opacity-50 rounded-pill">常見問題</h1>
+        <h1 class="text-white bg-secondary bg-opacity-75 rounded-pill">常見問題</h1>
       </div>
     </div>
   </header>
@@ -13,12 +13,12 @@
       <div class="accordion-item">
         <h2 class="accordion-header" id="headingOne">
           <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-            #1 入學前需要進行面試嗎?
+            #1 新手想運動，但不太曉得從什麼課程開始，有什麼建議嗎?
           </button>
         </h2>
         <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
           <div class="accordion-body">
-            本校以「先到先得」形式收生，申請日期會以幼稚園辨事處收妥及確定完成申請入學手續為準。
+            可以先報名體驗課程來參觀體驗。基本上我們的課程除了"進階瑜珈"、"TRX" 會比較不建議新手報名外， 其他課程都會應學員需求而做調整。 如果想要有趣一些的課程來維持運動習慣，可以先嘗試看看有氧課程、多功能訓練課程 :)
           </div>
         </div>
       </div>
@@ -26,12 +26,12 @@
       <div class="accordion-item">
         <h2 class="accordion-header" id="headingTwo">
           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-            #2 學校以哪種語言進行教學?
+            #2 如果臨時有事情或身體不舒服是可以請假的嗎?
           </button>
         </h2>
         <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
           <div class="accordion-body">
-            本校會以英語作主要教學語言。本校亦設有普通話堂予半日課程學生；全日課程學生則另有額外普通話堂。
+            可以的，透過電話(02-3456-7890)聯繫我們，我們將會替你安排其他課程時間。
           </div>
         </div>
       </div>
@@ -39,12 +39,25 @@
       <div class="accordion-item">
         <h2 class="accordion-header" id="headingThree">
           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-            #3 教師的資歷及經驗?
+            #3 上課後發現自己不太能適應的話，是否能退課呢?
           </button>
         </h2>
         <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
           <div class="accordion-body">
-            本校教師為教育局所登記之合資格幼兒教育工作者。教師亦受以英語為主要教學語言之訓練，在以英語授課之幼兒教育工作上擁有多年專業經驗。
+            基本上是可以的，但會先了解是什麼原因或狀況，從狀況再跟學員討論是否要換到其他老師或其他課程。
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingFour">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+            #4 可以單次入場嗎?
+          </button>
+        </h2>
+        <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            為了維護購課學員的上課品質，我們目前是不開放單次入場的。
           </div>
         </div>
       </div>
@@ -54,9 +67,3 @@
 
 </template>
 
-<script>
-
-export default {
-
-};
-</script>

@@ -81,47 +81,48 @@
 
   <section class="container">
     <div class="row mt-5">
+      <h2 class="mb-3 d-flex justify-content-center">會館及服務資訊</h2>
       <div class="col-md-4">
         <div class="card">
-          <img src="https://images.unsplash.com/photo-1517649763962-0c623066013b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" class="card-img-top height-s4 object-fit-cover" alt="">
+          <img src="http://www.ymcataipei.org.tw/archive/hotel/303/service_144_vr_2511_.JPG" class="card-img-top height-s4 object-fit-cover" alt="">
           <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <h5 class="card-title">台北青年國際旅館 Y Hotel Taipei</h5>
+            <p class="card-text">位於台北市交通重要樞紐的台北車站附近，為商業、娛樂、購物及人文薈萃的精華區。我們秉持YMCA創立的初衷，提供平價、溫馨、清潔與安全的居住環境。</p>
           </div>
           <ul class="list-group list-group-flush">
-            <li class="list-group-item">An item</li>
-            <li class="list-group-item">A second item</li>
-            <li class="list-group-item">A third item</li>
+            <li class="list-group-item">100台北市許昌街19號</li>
+            <li class="list-group-item">Tel：(02)2311-3201</li>
+            <li class="list-group-item"><a href="http://www.ymcataipei.org.tw/">http://www.ymcataipei.org.tw/</a></li>
           </ul>
           <button type="button" class="btn-primary btn w-100">訂閱</button>
         </div>
       </div>
       <div class="col-md-4">
         <div class="card">
-          <img src="https://images.unsplash.com/photo-1537882111161-c3379a777c8b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" class="card-img-top height-s4 object-fit-cover" alt="">
+          <img src="https://www.ymca-taipei.org.tw/WEB//_imagecache/P=MW800,MH800,F,BFFFFFF/_Y%E6%9C%83%E9%A4%A8_11%E6%96%B0%E4%BA%94%E6%B3%B0%E5%9C%8B%E6%B0%91%E9%81%8B%E5%8B%95%E4%B8%AD%E5%BF%83.jpg" class="card-img-top height-s4 object-fit-cover" alt="">
           <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <h5 class="card-title">新北市泰山國民運動中心 New Taipe Taishan Civil Sports Center</h5>
+            <p class="card-text">台北YMCA專業游泳教學</p>
           </div>
           <ul class="list-group list-group-flush">
-            <li class="list-group-item">An item</li>
-            <li class="list-group-item">A second item</li>
-            <li class="list-group-item">A third item</li>
+            <li class="list-group-item">243新北市泰山區全興路167號</li>
+            <li class="list-group-item">Tel：(02)2296-8860</li>
+            <li class="list-group-item"><a href="http://www.xwtsc.com/">http://www.xwtsc.com/</a></li>
           </ul>
           <button type="button" class="btn-primary btn w-100">訂閱</button>
         </div>
       </div>
       <div class="col-md-4">
         <div class="card">
-          <img src="https://images.unsplash.com/photo-1549576490-b0b4831ef60a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" class="card-img-top height-s4 object-fit-cover" alt="">
+          <img src="https://www.ymca-taipei.org.tw/WEB//_imagecache/P=MW800,MH800,F,BFFFFFF/_Y%E6%9C%83%E9%A4%A8_12%E7%A6%8F%E9%9A%86%E7%87%9F%E5%9C%B04.jpg" class="card-img-top height-s4 object-fit-cover" alt="">
           <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <h5 class="card-title">福隆營地 Fu-Long Campsite</h5>
+            <p class="card-text">YMCA福隆營地位於福隆海水浴場旁，鐵公路交通方便。適合兩天一夜活動安排，歡迎公司團體或教會團契來此聯誼訓練。</p>
           </div>
           <ul class="list-group list-group-flush">
-            <li class="list-group-item">An item</li>
-            <li class="list-group-item">A second item</li>
-            <li class="list-group-item">A third item</li>
+            <li class="list-group-item">228新北市貢寮區福隆村福隆街54號</li>
+            <li class="list-group-item">Tel：(02)2822-7070</li>
+            <li class="list-group-item"><a href="http://qilian.ymca.org.tw/02about_5.html">http://qilian.ymca.org.tw/02about_5.html</a></li>
           </ul>
           <button type="button" class="btn-primary btn w-100">訂閱</button>
         </div>
