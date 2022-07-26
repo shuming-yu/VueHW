@@ -1,42 +1,29 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <Loading :active="isLoading"></Loading>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
       <a class="navbar-brand" href="#">
-      <img src="../assets/logo.png" alt="" width="30" height="28" class="d-inline-block align-text-top">
-      Bootstrap
+      <img src="../img/logo.jpg" alt="" width="30" height="28" class="d-inline-block align-text-top">
+      台灣基督教青年協會
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarText">
-        <!-- <ul class="navbar-nav ms-auto mb-2 mb-lg-0 me-2">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Features</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Pricing</a>
-          </li>
-        </ul> -->
         <div class="navbar-nav ms-auto mb-2 mb-lg-0 me-2">
-          <router-link class="nav-link active" to="/"
+          <router-link class="nav-link" to="/"
             >首頁</router-link
           >
           <router-link class="nav-link" to="/userboard/cart"
             >商品列表</router-link
           >
-          <router-link class="nav-link" to="#"
+          <router-link class="nav-link" to="/userboard/faq"
             >常見問題</router-link
           >
           <router-link class="nav-link" to="/login"
             >後台</router-link
           >
         </div>
-        <!-- <span class="navbar-text">
-          Navbar text with an inline element
-        </span> -->
       </div>
     </div>
   </nav>
@@ -156,7 +143,7 @@
 export default {
   data() {
     return {
-
+      isLoading: false,
     };
   },
 
