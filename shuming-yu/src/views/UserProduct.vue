@@ -62,6 +62,9 @@ export default {
       },
     };
   },
+
+  inject: ["emitter"],
+
   methods: {
     getProduct() {
       // 單一商品細節api = https://github.com/hexschool/vue3-course-api-wiki/wiki/%E5%AE%A2%E6%88%B6%E8%B3%BC%E7%89%A9-%5B%E5%85%8D%E9%A9%97%E8%AD%89%5D#%E5%96%AE%E4%B8%80%E5%95%86%E5%93%81%E7%B4%B0%E7%AF%80
@@ -86,6 +89,18 @@ export default {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`;
       this.$http.post(api, { data: cart }).then((res) => {
         console.log(res);
+        if(res.data.success){
+          this.emitter.emit('push-message', {
+            style: 'success',
+            title: '新增商品成功',
+          })
+        }else{
+          this.emitter.emit('push-message', {
+            style: 'danger',
+            title: '新增商品失敗',
+            content: res.data.message.join('、'),
+          })
+        }
         this.status.loadingItem = "";
         this.$router.push("/userboard/cart"); // 加入成功後跳回 cart 頁面
       });

@@ -300,6 +300,8 @@ export default {
     };
   },
 
+  inject: ["emitter"],
+
   components: {
     DelModal,
   },
@@ -336,6 +338,18 @@ export default {
         this.isLoading = false;
         this.status.loadingItem = ""; // 成功後清空
         console.log(res); // 確認送出是否成功
+        if(res.data.success){
+          this.emitter.emit('push-message', {
+            style: 'success',
+            title: '新增商品成功',
+          })
+        }else{
+          this.emitter.emit('push-message', {
+            style: 'danger',
+            title: '新增商品失敗',
+            content: res.data.message.join('、'),
+          })
+        }
         this.getCart(); // 重整購物車列表
       });
     },
