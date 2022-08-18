@@ -96,7 +96,7 @@ export default {
           // })
           this.$swal({
             icon: 'success',
-            title: '新增商品成功！',
+            title: `將 ${ this.product.title } 加入購物車！`,
           });
         }else{
           // this.emitter.emit('push-message', {

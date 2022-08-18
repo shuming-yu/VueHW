@@ -345,7 +345,7 @@ export default {
           // })
           this.$swal({
             icon: 'success',
-            title: '新增商品成功！',
+            title: '已將商品加入購物車！',
           });
         }else{
           // this.emitter.emit('push-message', {
@@ -398,12 +398,12 @@ export default {
         if(res.data.success){
           this.$swal({
             icon: 'success',
-            title: '刪除商品成功！',
+            title: '已將商品從購物車移除！',
           })
         }else{
           this.$swal({
             icon: 'error',
-            title: '刪除商品失敗！',
+            title: '商品從購物車移除失敗！',
           })
         }
         this.status.loadingItem = "";

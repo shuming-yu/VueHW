@@ -51,6 +51,7 @@ configure({
 // 設定預設語系
 setLocale('zh_TW')
 
+// swal設定
 const options = {
   // confirmButtonColor: '#41b882',
   // cancelButtonColor: '#ff7674',
