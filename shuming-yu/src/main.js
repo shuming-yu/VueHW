@@ -12,6 +12,9 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import { date, currency } from './methods/filters';
 // 引用 bootstrap collapse
 import 'bootstrap/js/src/collapse';
+// vue-sweetalert2參考 : https://www.npmjs.com/package/vue-sweetalert2
+import VueSweetalert2 from 'vue-sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
 
 
 // VeeValiadation 參考 : https://hackmd.io/FFv0a5cBToOATP7uI5COMQ
@@ -48,6 +51,13 @@ configure({
 // 設定預設語系
 setLocale('zh_TW')
 
+const options = {
+  // confirmButtonColor: '#41b882',
+  // cancelButtonColor: '#ff7674',
+  showConfirmButton: false,
+  timer: 1500,
+};
+
 // 註冊 vee-validate 三個全域元件
 app.component('VForm', Form)
 app.component('VField', Field)
@@ -56,6 +66,7 @@ app.component('ErrorMessage', ErrorMessage)
 // use : 安裝插件
 app.use(VueAxios, axios)
 app.use(router)
+app.use(VueSweetalert2, options);
 // component : 註冊全局組件
 app.component('Loading', Loading)
 

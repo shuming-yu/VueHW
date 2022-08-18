@@ -90,16 +90,24 @@ export default {
       this.$http.post(api, { data: cart }).then((res) => {
         console.log(res);
         if(res.data.success){
-          this.emitter.emit('push-message', {
-            style: 'success',
-            title: '新增商品成功',
-          })
+          // this.emitter.emit('push-message', {
+          //   style: 'success',
+          //   title: '新增商品成功',
+          // })
+          this.$swal({
+            icon: 'success',
+            title: '新增商品成功！',
+          });
         }else{
-          this.emitter.emit('push-message', {
-            style: 'danger',
-            title: '新增商品失敗',
-            content: res.data.message.join('、'),
-          })
+          // this.emitter.emit('push-message', {
+          //   style: 'danger',
+          //   title: '新增商品失敗',
+          //   content: res.data.message.join('、'),
+          // })
+          this.$swal({
+            icon: 'error',
+            title: '加入購物車失敗！',
+          });
         }
         this.status.loadingItem = "";
         this.$router.push("/userboard/cart"); // 加入成功後跳回 cart 頁面

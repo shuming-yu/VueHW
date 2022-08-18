@@ -339,16 +339,24 @@ export default {
         this.status.loadingItem = ""; // 成功後清空
         console.log(res); // 確認送出是否成功
         if(res.data.success){
-          this.emitter.emit('push-message', {
-            style: 'success',
-            title: '新增商品成功',
-          })
+          // this.emitter.emit('push-message', {
+          //   style: 'success',
+          //   title: '新增商品成功',
+          // })
+          this.$swal({
+            icon: 'success',
+            title: '新增商品成功！',
+          });
         }else{
-          this.emitter.emit('push-message', {
-            style: 'danger',
-            title: '新增商品失敗',
-            content: res.data.message.join('、'),
-          })
+          // this.emitter.emit('push-message', {
+          //   style: 'danger',
+          //   title: '新增商品失敗',
+          //   content: res.data.message.join('、'),
+          // })
+          this.$swal({
+            icon: 'error',
+            title: '加入購物車失敗！',
+          });
         }
         this.getCart(); // 重整購物車列表
       });
@@ -386,7 +394,18 @@ export default {
       // 刪除某一筆購物車資料 api = https://github.com/hexschool/vue3-course-api-wiki/wiki/%E5%AE%A2%E6%88%B6%E8%B3%BC%E7%89%A9-%5B%E5%85%8D%E9%A9%97%E8%AD%89%5D#%E5%88%AA%E9%99%A4%E6%9F%90%E4%B8%80%E7%AD%86%E8%B3%BC%E7%89%A9%E8%BB%8A%E8%B3%87%E6%96%99
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${id}`;
       this.$http.delete(api).then((res) => {
-        //console.log(res);
+        console.log(res);
+        if(res.data.success){
+          this.$swal({
+            icon: 'success',
+            title: '刪除商品成功！',
+          })
+        }else{
+          this.$swal({
+            icon: 'error',
+            title: '刪除商品失敗！',
+          })
+        }
         this.status.loadingItem = "";
         this.getCart(); // 重整購物車列表
       });
