@@ -280,6 +280,7 @@ export default {
   data() {
     return {
       products: [], // 產品資訊
+      product: {},
       isLoading: false, // 預設 false - 關閉功能
       status: {
         loadingItem: "", // 對應品項 id
@@ -339,13 +340,14 @@ export default {
         this.status.loadingItem = ""; // 成功後清空
         console.log(res); // 確認送出是否成功
         if(res.data.success){
+          this.product = res.data.data.product; // 取得資訊塞入 product 內
           // this.emitter.emit('push-message', {
           //   style: 'success',
           //   title: '新增商品成功',
           // })
           this.$swal({
             icon: 'success',
-            title: '已將商品加入購物車！',
+            title: `已將 ${ this.product.title } 加入購物車！`,
           });
         }else{
           // this.emitter.emit('push-message', {
@@ -358,6 +360,7 @@ export default {
             title: '加入購物車失敗！',
           });
         }
+        this.product = {},  // 結束後清空
         this.getCart(); // 重整購物車列表
       });
     },
