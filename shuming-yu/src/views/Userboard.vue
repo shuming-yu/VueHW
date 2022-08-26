@@ -32,12 +32,6 @@
     <router-view />
   </div>
 
-  <footer class="bg-dark py-2 mt-5 fixed-bottom">
-    <div class="container text-white">
-      <div class="text-center">Copyright &copy; 2022 All Rights Reserved. Designed by ShuMingYU</div>
-    </div>
-  </footer>
-
 </template>
 
 <script>

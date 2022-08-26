@@ -271,6 +271,24 @@
     </div>
     <!-- 用戶訂單END -->
   </div>
+
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+  <footer class="p-2 border-top bg-light">
+    <div class="container align-items-center justify-content-between d-flex">
+      <p class="mb-0 text-muted">
+        Copyright &copy; 2022 All Rights Reserved. Designed by ShuMingYU
+      </p>
+      <ul class="nav social">
+        <li class="nav-item">
+          <a href="https://github.com/shuming-yu" class="nav-link text-muted"> <i class="fa fa-github fa-2x"></i> </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link text-muted"> <i class="fa fa-facebook fa-2x"></i> </a>
+        </li>
+      </ul>
+    </div>
+  </footer>
+
 </template>
 
 <script>

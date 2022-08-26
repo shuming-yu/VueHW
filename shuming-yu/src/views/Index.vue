@@ -80,11 +80,11 @@
   </section>
 
   <section class="container">
-    <div class="row mt-5">
+    <div class="row mt-4 g-4">
       <h2 class="mb-3 d-flex justify-content-center">會館及服務資訊</h2>
       <div class="col-md-4">
         <div class="card">
-          <img src="http://www.ymcataipei.org.tw/archive/hotel/303/service_144_vr_2511_.JPG" class="card-img-top height-s4 object-fit-cover" alt="">
+          <img src="https://www.ymcahotel.tw/archive/hotel/303/vr_1759_.JPG" class="card-img-top height-s4 object-fit-cover" alt="">
           <div class="card-body">
             <h5 class="card-title">台北青年國際旅館 Y Hotel Taipei</h5>
             <p class="card-text">位於台北市交通重要樞紐的台北車站附近，為商業、娛樂、購物及人文薈萃的精華區。我們秉持YMCA創立的初衷，提供平價、溫馨、清潔與安全的居住環境。</p>
@@ -130,9 +130,20 @@
     </div>
   </section>
 
-  <footer class="bg-dark py-2 mt-5">
-    <div class="container text-white">
-      <div class="text-center">Copyright &copy; 2022 All Rights Reserved. Designed by ShuMingYU</div>
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+  <footer class="mt-4 p-2 border-top bg-light">
+    <div class="container align-items-center justify-content-between d-flex">
+      <p class="mb-0 text-muted">
+        Copyright &copy; 2022 All Rights Reserved. Designed by ShuMingYU
+      </p>
+      <ul class="nav social">
+        <li class="nav-item">
+          <a href="https://github.com/shuming-yu" class="nav-link text-muted"> <i class="fa fa-github fa-2x"></i> </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link text-muted"> <i class="fa fa-facebook fa-2x"></i> </a>
+        </li>
+      </ul>
     </div>
   </footer>
 
